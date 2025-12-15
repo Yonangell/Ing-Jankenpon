@@ -102,7 +102,7 @@ function reiniciarResultados() {
 /**
  * Ejecuta una sola ronda del juego de Piedra, Papel o Tijera.
  * Determina el ganador, actualiza las estadísticas y la UI.
- * @param {string} elegirUsuario - La opción elegida por el usuario ('piedra', 
+ * @param {string} elegirUsuario - La opción elegida por el usuario ('piedra',
  * 'papel', 'tijera').
  */
 function jugarRonda(elegirUsuario) {
@@ -145,7 +145,7 @@ function jugarRonda(elegirUsuario) {
     resultado: resultadoTipo,
   });
 
-  // Limita el historial a las ultimas 5 rondas 
+  // Limita el historial a las ultimas 5 rondas
   if (estadisticas.historial.length > 5) {
     estadisticas.historial.pop(); // Elimina la ultima ronda del arreglo
   }
@@ -161,13 +161,31 @@ function jugarRonda(elegirUsuario) {
 function cargarModoOscuro() {
   const temaOscuro = localStorage.getItem(STORAGE_THEME_KEY);
 
+  const bodyTag = document.body;
+
   if (
     temaOscuro === "dark" ||
-    (!temaOscuro && window.matchMedia("(prefers-color-sheme: dark)").matches)
+    (!temaOscuro && window.matchMedia("(prefers-color-scheme: dark)").matches)
   ) {
-    document.documentElement.classList.add("dark");
+    bodyTag.classList.add("dark");
+    bodyTag.style.backgroundColor = "#111827"; 
+    bodyTag.style.color = "#f9fafb"; 
   } else {
-    document.documentElement.classList.remove("dark");
+    bodyTag.classList.remove("dark");
+    bodyTag.style.backgroundColor = "#f3f4f6"; 
+    bodyTag.style.color = "#111827"; 
+  }
+
+  const botonModo = document.querySelector(
+    'button[onclick="toggleModoOscuro()"]'
+  );
+  if (botonModo) {
+    const spanTexto = botonModo.querySelector("span");
+    if (spanTexto) {
+      spanTexto.textContent = bodyTag.classList.contains("dark")
+        ? "Cambiar a modo claro"
+        : "Cambiar a modo oscuro";
+    }
   }
 }
 
@@ -176,14 +194,31 @@ function cargarModoOscuro() {
  */
 
 function toggleModoOscuro() {
-  const htmlTag = document.documentElement;
+  // const htmlTag = document.documentElement;
+  const bodyTag = document.body;
 
-  if (htmlTag.classList.contains("dark")) {
-    htmlTag.classList.remove("dark");
+  if (bodyTag.classList.contains("dark")) {
+    bodyTag.classList.remove("dark");
+    bodyTag.style.backgroundColor = "#f3f4f6"; 
+    bodyTag.style.color = "#111827"; 
     localStorage.setItem(STORAGE_THEME_KEY, "light");
   } else {
-    htmlTag.classList.add("dark");
+    bodyTag.classList.add("dark");
+    bodyTag.style.backgroundColor = "#111827"; 
+    bodyTag.style.color = "#f9fafb"; 
     localStorage.setItem(STORAGE_THEME_KEY, "dark");
+  }
+
+  const botonModo = document.querySelector(
+    'button[onclick="toggleModoOscuro()"]'
+  );
+  if (botonModo) {
+    const spanTexto = botonModo.querySelector("span");
+    if (spanTexto) {
+      spanTexto.textContent = bodyTag.classList.contains("dark")
+        ? "Cambiar a modo claro"
+        : "Cambiar a modo oscuro";
+    }
   }
 }
 

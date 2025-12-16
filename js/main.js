@@ -194,7 +194,6 @@ function cargarModoOscuro() {
  */
 
 function toggleModoOscuro() {
-  // const htmlTag = document.documentElement;
   const bodyTag = document.body;
 
   if (bodyTag.classList.contains("dark")) {

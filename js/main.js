@@ -168,12 +168,12 @@ function cargarModoOscuro() {
     (!temaOscuro && window.matchMedia("(prefers-color-scheme: dark)").matches)
   ) {
     bodyTag.classList.add("dark");
-    bodyTag.style.backgroundColor = "#111827"; 
-    bodyTag.style.color = "#f9fafb"; 
+    bodyTag.style.backgroundColor = "#111827";
+    bodyTag.style.color = "#f9fafb";
   } else {
     bodyTag.classList.remove("dark");
-    bodyTag.style.backgroundColor = "#f3f4f6"; 
-    bodyTag.style.color = "#111827"; 
+    bodyTag.style.backgroundColor = "#d1d5db"; // bg-gray-300 (más oscuro)
+    bodyTag.style.color = "#111827"; // text-gray-900
   }
 
   const botonModo = document.querySelector(
@@ -198,13 +198,13 @@ function toggleModoOscuro() {
 
   if (bodyTag.classList.contains("dark")) {
     bodyTag.classList.remove("dark");
-    bodyTag.style.backgroundColor = "#f3f4f6"; 
-    bodyTag.style.color = "#111827"; 
+    bodyTag.style.backgroundColor = "#d1d5db"; // bg-gray-300 (más oscuro)
+    bodyTag.style.color = "#111827"; // text-gray-900
     localStorage.setItem(STORAGE_THEME_KEY, "light");
   } else {
     bodyTag.classList.add("dark");
-    bodyTag.style.backgroundColor = "#111827"; 
-    bodyTag.style.color = "#f9fafb"; 
+    bodyTag.style.backgroundColor = "#111827";
+    bodyTag.style.color = "#f9fafb";
     localStorage.setItem(STORAGE_THEME_KEY, "dark");
   }
 
